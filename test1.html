@@ -1,0 +1,121 @@
+<!DOCTYP E html>
+<html>
+	<head>
+		<title>hien thi du lieu js</title>
+		<style>
+			table, th, td {
+				border:1px solid black;
+				border-collapse: collapse;
+				padding:15px;
+			}
+			th{
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="width:400px; float:left">
+		<form>
+			<div style="margin-bottom:15px">Họ <input type="text" id="ho" value=""></div>
+			<div style="margin-bottom:15px">Tên <input type="text" id="ten" value=""></div>
+			<div style="margin-bottom:15px">Địa chỉ <input type="text" id="dc" value=""></div>
+			<div style="margin-bottom:15px">Tuổi <input type="text" id="tuoi" value=""></div>
+			<button  type="button" onclick="luu()" style="background-color:#00ff00; margin-left:200px; border:0px">Lưu</button></div>
+		</form>	
+		</div>
+		<input type="text" id="myInput" placeholder="Search..." onkeyup="myFunction()" style="-webkit-border-radius: 5px;-moz-border-radius: 5px">
+		<table   style="width:400px; margin:20px; border:3px" id="myTable">
+			<thead>
+				<tr>
+					<th>Họ</th>
+					<th>Tên</th>
+					<th>Địa chỉ</th>
+					<th>Tuổi</th>
+				</tr>
+			</thead>
+			<tbody id="table">
+				
+			</tbody>
+		</table>
+		
+		
+		
+		<script>
+			var arrPerson = []
+		
+			function genderHtml(persons) {
+			
+				//var table = document.getElementById("table");
+				//table.innerHTML = "";
+				
+				persons.forEach(function(e, index) {
+					
+					console.log(e);
+					if (e.is_inserted == false) {
+	
+						newRow = table.insertRow(table.Length);
+						cell1 = newRow.insertCell(0);
+						cell2 = newRow.insertCell(1);
+						cell3 = newRow.insertCell(2);
+						cell4 = newRow.insertCell(3);
+						
+						cell1.innerHTML = e.first_name;
+						cell2.innerHTML = e.last_name;
+						cell3.innerHTML = e.address;
+						cell4.innerHTML = e.old;
+						
+						e.is_inserted = true;
+					}
+					
+				});
+				
+			}
+		
+			function luu(){
+				
+				Ho = document.getElementById("ho").value;
+				Ten = document.getElementById("ten").value;
+				Dc = document.getElementById("dc").value;
+				Tuoi = document.getElementById("tuoi").value;
+				
+				arrPerson.push({
+					first_name: Ho,
+					last_name: Ten,
+					address: Dc,
+					old: Tuoi,
+					is_inserted: false
+				});
+			
+				
+				genderHtml(arrPerson);
+				}
+			function myFunction() {
+
+                var input, filter, table, tr, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("table");
+				
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    var td = tr[i].getElementsByTagName("td");
+					
+                    if (td) {
+						var joiner = "";
+						for (var j = 0; j < td.length; j++) {
+							joiner = joiner + " " + td[j].innerText;
+						}
+						console.log(joiner);
+						
+                        if (joiner.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+
+                }
+            }
+		</script>
+	</body>
+</html>
